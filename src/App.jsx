@@ -1,11 +1,15 @@
 import "./App.css";
-import Title from "./components/Title";
+import Title from "./components/jsx/Title";
+import Calculator from "./components/jsx/Calculator";
 
 function App() {
   return (
-    <>
-      <Title />
-    </>
+    <div className="page">
+      <Title></Title>
+      <div className="calculator">
+        <Calculator />
+      </div>
+    </div>
   );
 }
 
