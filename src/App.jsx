@@ -4,7 +4,7 @@ import Calculator from "./components/jsx/Calculator";
 
 function App() {
   return (
-    <div className="page">
+    <div>
       <Title></Title>
       <div className="calculator">
         <Calculator />

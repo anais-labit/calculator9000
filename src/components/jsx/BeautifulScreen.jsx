@@ -4,9 +4,9 @@ import "../css/BeautifulScreen.css";
 const BeautifulScreen = ({ value }) => {
 
   return (
-    <p className="beautifulScreen" >
+    <h1 className="beautifulScreen" >
       {value}
-    </p>
+    </h1>
   );
 };
 
