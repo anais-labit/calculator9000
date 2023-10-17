@@ -1,0 +1,13 @@
+.message {
+  font-size: 20px;
+  text-align: center;
+  padding: 30px;
+  width: 10%; 
+  background-color: #93a2b3; 
+  color: #fff; 
+  border-radius: 10px;
+  position: fixed;
+  top: 12%; 
+  left: 20%; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}

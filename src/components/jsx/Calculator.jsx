@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import BeautifulScreen from "./BeautifulScreen";
 import ButtonsContainer from "./ButtonsContainer";
 import Button from "./Button";
+import ItSOverNineThousand from "./ItSOverNineThousand";
 import "../css/Calculator.css";
 
 const btnValues = [
@@ -23,6 +24,8 @@ const Calculator = () => {
     num: 0,
     res: 0,
   });
+
+  let [easter, setEaster] = useState(false);
 
   const numClickHandler = (e) => {
     e.preventDefault();
@@ -91,6 +94,9 @@ const Calculator = () => {
         num: 0,
       });
     }
+    if (Number(removeSpaces(calc.res)) > 9000) {
+      setEaster(true);
+    }
   };
 
   const invertClickHandler = () => {
@@ -121,37 +127,41 @@ const Calculator = () => {
       num: 0,
       res: 0,
     });
+    setEaster(false);
   };
 
   return (
     <>
-      <BeautifulScreen value={calc.num ? calc.num : calc.res} />
-      <ButtonsContainer>
-        {btnValues.flat().map((btn, i) => {
-          return (
-            <Button
-              key={i}
-              className={btn === "=" ? "equals" : ""}
-              value={btn}
-              onClick={
-                btn === "C"
-                  ? resetClickHandler
-                  : btn === "+-"
-                  ? invertClickHandler
-                  : btn === "%"
-                  ? percentClickHandler
-                  : btn === "="
-                  ? equalsClickHandler
-                  : btn === "/" || btn === "X" || btn === "-" || btn === "+"
-                  ? signClickHandler
-                  : btn === "."
-                  ? commaClickHandler
-                  : numClickHandler
-              }
-            />
-          );
-        })}
-      </ButtonsContainer>
+      {easter && <ItSOverNineThousand />}
+      <div className="calculator">
+        <BeautifulScreen value={calc.num ? calc.num : calc.res} />
+        <ButtonsContainer>
+          {btnValues.flat().map((btn, i) => {
+            return (
+              <Button
+                key={i}
+                className={btn === "=" ? "equals" : ""}
+                value={btn}
+                onClick={
+                  btn === "C"
+                    ? resetClickHandler
+                    : btn === "+-"
+                    ? invertClickHandler
+                    : btn === "%"
+                    ? percentClickHandler
+                    : btn === "="
+                    ? equalsClickHandler
+                    : btn === "/" || btn === "X" || btn === "-" || btn === "+"
+                    ? signClickHandler
+                    : btn === "."
+                    ? commaClickHandler
+                    : numClickHandler
+                }
+              />
+            );
+          })}
+        </ButtonsContainer>
+      </div>
     </>
   );
 };

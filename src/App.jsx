@@ -5,10 +5,8 @@ import Calculator from "./components/jsx/Calculator";
 function App() {
   return (
     <div>
-      <Title></Title>
-      <div className="calculator">
-        <Calculator />
-      </div>
+      <Title />
+      <Calculator />
     </div>
   );
 }
