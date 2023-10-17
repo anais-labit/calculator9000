@@ -25,13 +25,11 @@ const Calculator = () => {
     res: 0,
   });
 
-  let [easter, setEaster] = useState(false);
-
   const numClickHandler = (e) => {
     e.preventDefault();
     const value = e.target.innerHTML;
 
-    if (removeSpaces(calc.num).length < 16) {
+    if (removeSpaces(calc.num).length < 12) {
       setCalc({
         ...calc,
         num:
@@ -67,6 +65,8 @@ const Calculator = () => {
     });
   };
 
+  let [easter, setEaster] = useState(false);
+
   const equalsClickHandler = () => {
     if (calc.sign && calc.num) {
       const math = (a, b, sign) =>
@@ -93,9 +93,15 @@ const Calculator = () => {
         sign: "",
         num: 0,
       });
-    }
-    if (Number(removeSpaces(calc.res)) > 9000) {
-      setEaster(true);
+      if (
+        math(
+          Number(removeSpaces(calc.res)),
+          Number(removeSpaces(calc.num)),
+          calc.sign
+        ) > 9000
+      ) {
+        setEaster(true);
+      }
     }
   };
 

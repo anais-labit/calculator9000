@@ -10,3 +10,4 @@ const BeautifulScreen = ({ value }) => {
 };
 
 export default BeautifulScreen;
+
