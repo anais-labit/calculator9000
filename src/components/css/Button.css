@@ -29,8 +29,16 @@ button:hover {
   background-color: #eb9c1e;
 }
 
+.save {
+  background-color: #32cf69;
+}
+
+.save:hover {
+  background-color: #10d154;
+}
+
 .equals {
-  grid-column: 3 / 5;
+  /* grid-column: 3 / 5; */
   background-color: rgb(243, 61, 29);
 }
 

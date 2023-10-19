@@ -1,0 +1,9 @@
+.history {
+  background-color: #ffffff91;
+  border-radius: 10px;
+  margin: 20px;
+  text-align: center;
+  padding: 10px;
+  width: 200px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}

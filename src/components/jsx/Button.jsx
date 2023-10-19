@@ -1,5 +1,10 @@
 import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFloppyDisk } from "@fortawesome/free-solid-svg-icons";
+
+const element = <FontAwesomeIcon icon={faFloppyDisk} />;
 import "../css/Button.css";
+
 
 const Button = ({ value, onClick }) => {
   let className = "";
@@ -7,7 +12,6 @@ const Button = ({ value, onClick }) => {
   if (value === "=") {
     className = "equals";
   } else if (
-    value === "+-" ||
     value === "%" ||
     value === "X" ||
     value === "-" ||
@@ -17,7 +21,11 @@ const Button = ({ value, onClick }) => {
     className = "operator";
   } else if (value === "C") {
     className = "reset";
-  } else {
+  } else if (value === "save") {
+    className = "save";
+    value = element;
+    
+    } else {
     className = "";
   }
 

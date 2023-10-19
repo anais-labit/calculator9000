@@ -3,6 +3,7 @@ import BeautifulScreen from "./BeautifulScreen";
 import ButtonsContainer from "./ButtonsContainer";
 import Button from "./Button";
 import ItSOverNineThousand from "./ItSOverNineThousand";
+import CalculationHistory from "./CalculationHistory";
 import "../css/Calculator.css";
 
 const btnValues = [
@@ -10,7 +11,7 @@ const btnValues = [
   [7, 8, 9, "X"],
   [4, 5, 6, "-"],
   [1, 2, 3, "+"],
-  [0, ".", "="],
+  [0, ".", "=", "save"],
 ];
 
 const toLocaleString = (num) =>
@@ -136,6 +137,14 @@ const Calculator = () => {
     setEaster(false);
   };
 
+  let [calcHistory, setCalcHistory] = useState([]);
+  const saveCalculation = () => {
+    if (calc.sign && calc.num) {
+      const calculation = `${calc.res} ${calc.sign} ${calc.num} = ${calc.res}`;
+      setCalcHistory([...calcHistory, calculation]);
+    }
+  };
+
   return (
     <>
       {easter && <ItSOverNineThousand />}
@@ -161,6 +170,8 @@ const Calculator = () => {
                     ? signClickHandler
                     : btn === "."
                     ? commaClickHandler
+                    : btn === "save"
+                    ? saveCalculation
                     : numClickHandler
                 }
               />
@@ -168,6 +179,7 @@ const Calculator = () => {
           })}
         </ButtonsContainer>
       </div>
+      <CalculationHistory calcHistory={calcHistory} />
     </>
   );
 };
