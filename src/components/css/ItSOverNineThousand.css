@@ -2,12 +2,20 @@
   font-size: 20px;
   text-align: center;
   padding: 30px;
-  width: 10%; 
-  background-color: #93a2b3; 
-  color: #fff; 
+  width: 6%;
+  background-color: #93a2b3;
+  color: #fff;
   border-radius: 10px;
   position: fixed;
-  top: 12%; 
-  left: 20%; 
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  top: 12%;
+  left: 30%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+  .message {
+    left: 2%;
+    width: 50%;
+    top: 5%;
+  }
 }
