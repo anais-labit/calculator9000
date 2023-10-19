@@ -5,13 +5,13 @@ import { faFloppyDisk } from "@fortawesome/free-solid-svg-icons";
 const element = <FontAwesomeIcon icon={faFloppyDisk} />;
 import "../css/Button.css";
 
-
 const Button = ({ value, onClick }) => {
   let className = "";
 
   if (value === "=") {
     className = "equals";
   } else if (
+    value === "+-" ||
     value === "%" ||
     value === "X" ||
     value === "-" ||
@@ -24,8 +24,7 @@ const Button = ({ value, onClick }) => {
   } else if (value === "save") {
     className = "save";
     value = element;
-    
-    } else {
+  } else {
     className = "";
   }
 

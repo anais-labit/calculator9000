@@ -14,6 +14,18 @@ const btnValues = [
   [0, ".", "=", "save"],
 ];
 
+const math = (a, b, sign) => {
+  if (sign === "+") {
+    return a + b;
+  } else if (sign === "-") {
+    return a - b;
+  } else if (sign === "X") {
+    return a * b;
+  } else {
+    return a / b;
+  }
+};
+
 const toLocaleString = (num) =>
   String(num).replace(/(?<!\..*)(\d)(?=(?:\d{3})+(?:\.|$))/g, "$1 ");
 
@@ -70,14 +82,6 @@ const Calculator = () => {
 
   const equalsClickHandler = () => {
     if (calc.sign && calc.num) {
-      const math = (a, b, sign) =>
-        sign === "+"
-          ? a + b
-          : sign === "-"
-          ? a - b
-          : sign === "X"
-          ? a * b
-          : a / b;
 
       setCalc({
         ...calc,
@@ -93,7 +97,7 @@ const Calculator = () => {
               ),
         sign: "",
         num: 0,
-      });
+      }) ;
       if (
         math(
           Number(removeSpaces(calc.res)),
@@ -140,8 +144,17 @@ const Calculator = () => {
   let [calcHistory, setCalcHistory] = useState([]);
   const saveCalculation = () => {
     if (calc.sign && calc.num) {
-      const calculation = `${calc.res} ${calc.sign} ${calc.num} = ${calc.res}`;
-      setCalcHistory([...calcHistory, calculation]);
+      // Calculer le résultat
+      const result = toLocaleString(
+        math(
+          Number(removeSpaces(calc.res)),
+          Number(removeSpaces(calc.num)),
+          calc.sign
+        )
+      );
+      // Créer la chaîne de calcul
+      const calculation = `${calc.res} ${calc.sign} ${calc.num}`;
+      setCalcHistory([...calcHistory, calculation, result]);
     }
   };
 
