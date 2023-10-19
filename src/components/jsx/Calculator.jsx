@@ -151,7 +151,7 @@ const Calculator = () => {
         )
       );
       const calculation = `${calc.res} ${calc.sign} ${calc.num} = ${result}`;
-      setCalcHistory([...calcHistory, calculation]);
+      setCalcHistory([calculation, ...calcHistory]);
     }
   };
 
