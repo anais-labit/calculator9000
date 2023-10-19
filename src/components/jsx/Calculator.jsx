@@ -8,7 +8,7 @@ import "../css/Calculator.css";
 
 const btnValues = [
   ["C", "+-", "%", "/"],
-  [7, 8, 9, "X"],
+  [7, 8, 9, "x"],
   [4, 5, 6, "-"],
   [1, 2, 3, "+"],
   [0, ".", "=", "save"],
@@ -19,7 +19,7 @@ const math = (a, b, sign) => {
     return a + b;
   } else if (sign === "-") {
     return a - b;
-  } else if (sign === "X") {
+  } else if (sign === "x") {
     return a * b;
   } else {
     return a / b;
@@ -82,7 +82,6 @@ const Calculator = () => {
 
   const equalsClickHandler = () => {
     if (calc.sign && calc.num) {
-
       setCalc({
         ...calc,
         res:
@@ -97,7 +96,7 @@ const Calculator = () => {
               ),
         sign: "",
         num: 0,
-      }) ;
+      });
       if (
         math(
           Number(removeSpaces(calc.res)),
@@ -144,7 +143,6 @@ const Calculator = () => {
   let [calcHistory, setCalcHistory] = useState([]);
   const saveCalculation = () => {
     if (calc.sign && calc.num) {
-      // Calculer le résultat
       const result = toLocaleString(
         math(
           Number(removeSpaces(calc.res)),
@@ -152,9 +150,8 @@ const Calculator = () => {
           calc.sign
         )
       );
-      // Créer la chaîne de calcul
-      const calculation = `${calc.res} ${calc.sign} ${calc.num}`;
-      setCalcHistory([...calcHistory, calculation, result]);
+      const calculation = `${calc.res} ${calc.sign} ${calc.num} = ${result}`;
+      setCalcHistory([...calcHistory, calculation]);
     }
   };
 
@@ -162,7 +159,14 @@ const Calculator = () => {
     <>
       {easter && <ItSOverNineThousand />}
       <div className="calculator">
-        <BeautifulScreen value={calc.num ? calc.num : calc.res} />
+        <BeautifulScreen
+          value={
+            calc.num
+              ? (calc.res === 0 ? "" : calc.res) + calc.sign + calc.num
+              : calc.res
+          }
+        />
+
         <ButtonsContainer>
           {btnValues.flat().map((btn, i) => {
             return (
@@ -179,7 +183,7 @@ const Calculator = () => {
                     ? percentClickHandler
                     : btn === "="
                     ? equalsClickHandler
-                    : btn === "/" || btn === "X" || btn === "-" || btn === "+"
+                    : btn === "/" || btn === "x" || btn === "-" || btn === "+"
                     ? signClickHandler
                     : btn === "."
                     ? commaClickHandler

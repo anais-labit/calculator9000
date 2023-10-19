@@ -13,7 +13,7 @@ const Button = ({ value, onClick }) => {
   } else if (
     value === "+-" ||
     value === "%" ||
-    value === "X" ||
+    value === "x" ||
     value === "-" ||
     value === "+" ||
     value === "/"
