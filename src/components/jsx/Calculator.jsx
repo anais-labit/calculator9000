@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import BeautifulScreen from "./BeautifulScreen";
 import ButtonsContainer from "./ButtonsContainer";
 import Button from "./Button";
@@ -80,6 +80,28 @@ const Calculator = () => {
 
   let [easter, setEaster] = useState(false);
 
+  let [operationDone, setOperationDone] = useState(false);
+
+  useEffect(() => {
+    const saveButton = document.querySelector(".save");
+    const saveButtonClickHandler = () => {
+      console.log(operationDone);
+      markOperationDone();
+    };
+
+    if (saveButton) {
+      saveButton.addEventListener("click", saveButtonClickHandler);
+    }
+
+    return () => {
+      if (saveButton) {
+        saveButton.removeEventListener("click", saveButtonClickHandler);
+      }
+    };
+  }, [operationDone]);
+
+  const markOperationDone = () => setOperationDone(true);
+
   const equalsClickHandler = () => {
     if (calc.sign && calc.num) {
       setCalc({
@@ -97,6 +119,12 @@ const Calculator = () => {
         sign: "",
         num: 0,
       });
+      let result = math(
+        Number(removeSpaces(calc.res)),
+        Number(removeSpaces(calc.num)),
+        calc.sign
+      );
+      const operationString = calc.res + calc.sign + calc.num + " = " + result;
       if (
         math(
           Number(removeSpaces(calc.res)),
@@ -105,6 +133,11 @@ const Calculator = () => {
         ) > 9000
       ) {
         setEaster(true);
+      }
+      console.log(operationString);
+      console.log(operationDone);
+      if (operationDone) {
+        saveCalculation(operationString);
       }
     }
   };
@@ -141,18 +174,10 @@ const Calculator = () => {
   };
 
   let [calcHistory, setCalcHistory] = useState([]);
-  const saveCalculation = () => {
-    if (calc.sign && calc.num) {
-      const result = toLocaleString(
-        math(
-          Number(removeSpaces(calc.res)),
-          Number(removeSpaces(calc.num)),
-          calc.sign
-        )
-      );
-      const calculation = `${calc.res} ${calc.sign} ${calc.num} = ${result}`;
-      setCalcHistory([calculation, ...calcHistory]);
-    }
+
+  const saveCalculation = (operationString) => {
+    console.log(operationString);
+    setCalcHistory([operationString, ...calcHistory]);
   };
 
   return (
@@ -188,7 +213,10 @@ const Calculator = () => {
                     : btn === "."
                     ? commaClickHandler
                     : btn === "save"
-                    ? saveCalculation
+                    ? () => {
+                        console.log(operationDone);
+                        markOperationDone();
+                      }
                     : numClickHandler
                 }
               />

@@ -6,6 +6,7 @@ const CalculationHistory = ({ calcHistory }) => {
   return (
     <div className="history">
       <h4>Calculation History</h4>
+      <p>Click the Save Button to track your history</p>
       <ul>
         {calcHistory.map((item, index) => (
           <li key={index}>{item}</li>
