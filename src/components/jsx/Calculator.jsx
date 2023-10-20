@@ -85,7 +85,6 @@ const Calculator = () => {
   useEffect(() => {
     const saveButton = document.querySelector(".save");
     const saveButtonClickHandler = () => {
-      console.log(operationDone);
       markOperationDone();
     };
 
@@ -134,8 +133,7 @@ const Calculator = () => {
       ) {
         setEaster(true);
       }
-      console.log(operationString);
-      console.log(operationDone);
+
       if (operationDone) {
         saveCalculation(operationString);
       }
@@ -176,7 +174,6 @@ const Calculator = () => {
   let [calcHistory, setCalcHistory] = useState([]);
 
   const saveCalculation = (operationString) => {
-    console.log(operationString);
     setCalcHistory([operationString, ...calcHistory]);
   };
 
@@ -214,7 +211,6 @@ const Calculator = () => {
                     ? commaClickHandler
                     : btn === "save"
                     ? () => {
-                        console.log(operationDone);
                         markOperationDone();
                       }
                     : numClickHandler
